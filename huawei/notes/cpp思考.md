@@ -8,7 +8,7 @@
 - 对于 std::unordered_map：
   - myUnorderedMap.find(key); —— 复杂度 $O(1)$
 
-## 相关数据结构学习
+## 常见数据结构以及数据结构常见使用函数
 - vector ：就是用来平替掉我们之前使用的数组结构。同时我们vector内部的内容，可以引入unordered_map（哈希表）等其他常用的结构
   - `vector<vector<int>> nums(n+1,vector<int>(m+1,0));`:在确定大小的时候我们使用的二维vector的方法；
     - `vector<vector<pair<double,double>>> arr;`:直接可以实现arr[i]访问其中的数据
@@ -64,7 +64,7 @@
     - 在使用`push()`,`pop()`等相关func的时候，复杂度是O(logn)。在执行这些命令的时候是使用了堆的原则进行了处理
 
 
-**关于使用结构体时候的处理方法**
+## sort函数的使用方法
 - 使用Lambda表达式
 ```cpp
 std::sort(vec.begin(), vec.end(), [](const Node& a, const Node& b) {
@@ -89,13 +89,15 @@ std::sort(vec.begin(), vec.end()); // 此时不需要写第三个参数了
 ```
 
 
-## cpp中使用快读：
+## I/O算法
+### I/O算法实现快读快写
 ```cpp
 ios::sync_with_stdio(false);
 cin.tie(nullptr);
 endl->'\n'//endl本质上是要对于输出缓冲区进行刷新，使用快读的时候要搭配这个才能保证我们读取的速率
 ```
 
+### 对于整行数据进行读入
 在当前的代码中要求读入一整行的数据，但是没有提前跟你说明相关的数据量的时候：
 ```cpp
   string line;
@@ -110,7 +112,7 @@ endl->'\n'//endl本质上是要对于输出缓冲区进行刷新，使用快读�
 **Attention**
 - 看看这样的读入一整行的数据的问题的时候，前面如果有'\n'需要使用`cin.ignore()`把缓存库中的换行符给去除
 
-## 使用银行家算法进行处理：
+## 银行家算法舍入
 银行家舍入处理：主要就是笨笨cpp最人下人的一集
 ```cpp
 double r(double n){
@@ -163,8 +165,8 @@ auto cmp = [&value](int a, int b) {
     // 假设是按 value 数组里的值进行某种比较
     return value[a] < value[b]; 
 };
-
-sort(label[0].begin(), label[0].end(), cmp);
+//2. label[]内部存储的是相应的序号信息，label 里的顺序，就是 value 从小到大的下标索引顺序。
+sort(label.begin(), label.end(), cmp);
 ```
 
 2. 我们之前使用的sort函数其实都是使用到了一次性的Lambda函数，于是我们是可以使用Lambda函数的形式来进行解决
@@ -179,11 +181,12 @@ sort(label[i].begin(), label[i].end(), cmp);
 
 3. 在我们使用类模板并且需要用户自定义比较规则和hash规则的容器，在使用Lambda表达式的时候是有额外的要求的：
 ```cpp
-//对于heap进行处理
+//对于堆进行处理
 //实现minHeap的方法
 auto cmp = [](int a, int b) { return a > b; };//这里比较反常的是使用a>b实现的是minHeap，用a<b是maxHeap
 //其中的逻辑可以理解为是：cmp是用来表示堆中相关元素的优先级的；使用a<b->大的数字优先级高->形成的是maxHeap；这也是为啥默认形成的heap是maxheap的原因
 priority_queue<int, vector<int>, decltype(cmp)> pq(cmp);
+//在priority_queue中最后一个参数的含义是cmp的变量类型，我们使用decltype可以得出其变量类型
 
 //创建一个按照字符串长度排序的 set
 auto cmp = [](const string& a, const string& b) {
