@@ -88,7 +88,6 @@ struct Node {
 std::sort(vec.begin(), vec.end()); // 此时不需要写第三个参数了
 ```
 
-
 ## I/O算法
 ### I/O算法实现快读快写
 ```cpp
@@ -214,14 +213,3 @@ myMap[-2] = "negative two";
 ```
 在使用上面的类模板中，注意不仅仅是在前面类型中要添加Lambda表达式，在后面函数对象的部分也是要添加Lambda表达式来实现；
 
-## stringstream处理未给出明确数量的输入
-```cpp
-string line;
-getline(cin, line);
-stringstream ss(line);
-string str1;
-while (ss >> str1)
-{
-  //输入到对应的数组中
-}
-```
