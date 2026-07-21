@@ -48,7 +48,7 @@
     - 按迭代器删除 — 返回下一个有效迭代器
     - 按范围删除 — 删除 [first, last) 范围内的元素
 
-- `map<map,value>`:其本身是有序的，但是是按照key升序进行排列的
+- `map<key,value>`:其本身是有序的，但是是按照key升序进行排列的
 
 - `pair<string,int>`:使用pair来进行处理，就是将两个不同的数据类型合并成一个单元。
   - `vector<pair<string,int>>`：能够使用sort来快速排序
