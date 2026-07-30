@@ -26,7 +26,8 @@
 - string
   - `str.append()`
   - `str.length()`
-  - `str.substr(start,end)`*[)*
+  - `str.substr(start,length)``[start,start+length)`
+    - length表示获取的长度
   - `str.substr(i)`*[i,+INF)*
 
 - `unordered_map<key,value> m` ： 哈希表。
