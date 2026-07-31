@@ -59,6 +59,8 @@
   - 使用的头文件是`#include<queue>`
   - 在默认情况下，我们创建的heap是maxheap，也就是顶部是max值的堆
     - minHeap：`priority_queue<int, vector<int>, greater<int>> pq;`
+      - 如果说是要更换其他的数据结构直接将int的部分进行更换即可，但是就是greater默认是取第一位数字大小进行堆排序的；
+      - 同时我们也是可以直接使用重构的方法
     - maxHeap:`priority_queue<int>;`
     - 相关原因见于后面对于Lambda的分析
   - 常使用的func主要就是：`push()`,`pop()`,`top()`,`empty()`等这些queue中常用的func
@@ -71,6 +73,12 @@
 std::sort(vec.begin(), vec.end(), [](const Node& a, const Node& b) {
     return a.data < b.data; // 升序排列
 });
+
+//更多是对于cmp进行重构
+auto cmp=[](const Node&a,const Node& b){
+    return a.first<b.first;
+};
+sort(vec.first(),vec.end().,cmp);
 //主要的记忆点就是：中间我们使用的[]之后部分都是一个lambda的表达式，于是是作为sort的一个参数存在的
 ```
 - 使用重载的方法
@@ -181,7 +189,6 @@ sort(label[i].begin(), label[i].end(), cmp);
 
 3. 在我们使用类模板并且需要用户自定义比较规则和hash规则的容器，在使用Lambda表达式的时候是有额外的要求的：
 ```cpp
-//对于堆进行处理
 //实现minHeap的方法
 auto cmp = [](int a, int b) { return a > b; };//这里比较反常的是使用a>b实现的是minHeap，用a<b是maxHeap
 //其中的逻辑可以理解为是：cmp是用来表示堆中相关元素的优先级的；使用a<b->大的数字优先级高->形成的是maxHeap；这也是为啥默认形成的heap是maxheap的原因
@@ -214,3 +221,16 @@ myMap[-2] = "negative two";
 ```
 在使用上面的类模板中，注意不仅仅是在前面类型中要添加Lambda表达式，在后面函数对象的部分也是要添加Lambda表达式来实现；
 
+## 使用stringsteam处理数据输入
+
+```cpp
+string line;
+while(getline(cin,line)){//getline：从标准输入中读取一整行数据
+    stringstream ss(line);//stringstream 可以将line（字符串）转化成ss输入输出流
+    int num, sum = 0;
+    while(ss>>num){//转化成输入流之后就可以使用遍历的方式进行遍历了
+        sum += num;
+    }
+    cout << sum << endl;
+}
+``` 
